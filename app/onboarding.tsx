@@ -1,89 +1,49 @@
-import { Platform, StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 
 import { HelloWave } from "@/components/hello-wave";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { Image } from "expo-image";
-import { Link } from "expo-router";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Colors } from "@/constants/theme";
 
 export default function OnBoardingScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
-        // <SymbolView name="camera.circle" size={250} />
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+        <IconSymbol
+          name="camera.circle"
+          size={250}
+          color={Colors.dark.snapPrimary}
         />
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Snapchat Camera!!</ThemedText>
+        <ThemedText type="title">Snapchat Camera!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction
-              title="Action"
-              icon="cube"
-              onPress={() => alert("Action pressed")}
-            />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert("Share pressed")}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert("Delete pressed")}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+      <ThemedText>
+        Welcome to friend! To provide the best experience, this app requires
+        permissions for the following:
+      </ThemedText>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">
-            npm run reset-project
-          </ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+        <ThemedText type="subtitle">Camera Permissions</ThemedText>
+        <ThemedText>📷 For taking pictures</ThemedText>
       </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Microphone Permissions</ThemedText>
+        <ThemedText>🎙️For taking videos with audio</ThemedText>
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Media Library Permissions</ThemedText>
+        <ThemedText>🖼️ To save/view your amazing shots</ThemedText>
+      </ThemedView>
+
+      <Button title="Continue" onPress={() => {}} />
     </ParallaxScrollView>
   );
 }
