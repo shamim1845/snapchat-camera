@@ -22,6 +22,8 @@ const MAPPING = {
   "chevron.left.forwardslash.chevron.right": "code",
   "chevron.right": "chevron-right",
   "camera.circle": "camera-alt",
+  "photo.stack": "photo-library",
+  magnifyingglass: "search",
 } as IconMapping;
 
 /**

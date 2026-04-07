@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
-const FIRST_OPEN_KEY = "hasOpened";
+export const FIRST_OPEN_KEY = "hasOpened";
 
 export function useFirstTimeOpen() {
   const [isFirstTime, setIsFirstTime] = useState(false);
