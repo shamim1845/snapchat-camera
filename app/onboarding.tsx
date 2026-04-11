@@ -9,15 +9,21 @@ import { Colors } from "@/constants/theme";
 import { FIRST_OPEN_KEY } from "@/hooks/useFirstTimeOpen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCameraPermissions, useMicrophonePermissions } from "expo-camera";
-import { usePermissions } from "expo-media-library";
-import { router } from "expo-router";
+import { usePermissions as useMediaLibraryPermissions } from "expo-media-library";
+import { Redirect, router } from "expo-router";
 
 export default function OnBoardingScreen() {
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [microphonePermission, requestMicrophonePermission] =
     useMicrophonePermissions();
   const [mediaLibraryPermission, requestMediaLibraryPermission] =
-    usePermissions();
+    useMediaLibraryPermissions();
+
+  console.log({
+    cameraPermission: JSON.stringify(cameraPermission, null, 2),
+    microphonePermission: JSON.stringify(microphonePermission, null, 2),
+    mediaLibraryPermission: JSON.stringify(mediaLibraryPermission, null, 2),
+  });
 
   async function handleContinue() {
     const allPermissionsGranted = await requestAllPermissions();
@@ -54,6 +60,15 @@ export default function OnBoardingScreen() {
     // All permissions granted
     await AsyncStorage.setItem(FIRST_OPEN_KEY, "true");
     return true;
+  }
+
+  // If all permission granted then redirect to home
+  if (
+    cameraPermission?.granted &&
+    microphonePermission?.granted &&
+    mediaLibraryPermission?.granted
+  ) {
+    return <Redirect href="/(tabs)" />;
   }
 
   return (

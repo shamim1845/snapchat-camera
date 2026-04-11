@@ -24,6 +24,15 @@ const MAPPING = {
   "camera.circle": "camera-alt",
   "photo.stack": "photo-library",
   magnifyingglass: "search",
+  "plus.magnifyingglass": "saved-search",
+  "minus.magnifyingglass": "search-off",
+  qrcode: "qr-code",
+  // Camera tools
+  "flashlight.off.circle": "flashlight-off",
+  "flashlight.on.circle": "flashlight-on",
+  // "flashlight.off.circle": "flash-off",
+  // "flashlight.on.circle": "flash-on",
+  "flashlight.slash.circle": "flash-auto",
 } as IconMapping;
 
 /**

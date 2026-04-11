@@ -5,6 +5,7 @@ import * as React from "react";
 import { Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "./themed-text";
 
+// constants
 const ICON_SIZE = 20;
 
 export default function BottomRowTools({
@@ -24,22 +25,34 @@ export default function BottomRowTools({
 
       <View style={styles.directionRowItemsCenter}>
         <TouchableOpacity
-          style={cameraMode === "picture" ? styles.activeButton : {}}
           onPress={() => {
             setCameraMode("picture");
           }}
         >
-          <ThemedText>Snap</ThemedText>
+          <ThemedText
+            style={
+              cameraMode === "picture"
+                ? styles.activeButton
+                : styles.deactiveButton
+            }
+          >
+            Snap
+          </ThemedText>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            backgroundColor: cameraMode === "video" ? "white" : "transparent",
-          }}
           onPress={() => {
             setCameraMode("video");
           }}
         >
-          <ThemedText>Video</ThemedText>
+          <ThemedText
+            style={
+              cameraMode === "video"
+                ? styles.activeButton
+                : styles.deactiveButton
+            }
+          >
+            Video
+          </ThemedText>
         </TouchableOpacity>
       </View>
 
@@ -75,10 +88,15 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   activeButton: {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    borderRadius: 20,
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    fontWeight: "bold",
+    transitionTimingFunction: "ease-in-out",
+    transitionProperty: "font-weight",
+    transitionDuration: "200ms",
+  },
+  deactiveButton: {
+    fontWeight: "100",
+    transitionTimingFunction: "ease-in-out",
+    transitionProperty: "font-weight",
+    transitionDuration: "200ms",
   },
 });

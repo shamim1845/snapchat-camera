@@ -21,8 +21,12 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
-          name="modal"
-          options={{ presentation: "modal", title: "Modal" }}
+          name="media-library"
+          options={{
+            presentation: "modal",
+            animation: "fade",
+            title: "Media Library",
+          }}
         />
         <Stack.Screen
           name="onboarding"
