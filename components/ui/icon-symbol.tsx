@@ -24,15 +24,21 @@ const MAPPING = {
   "camera.circle": "camera-alt",
   "photo.stack": "photo-library",
   magnifyingglass: "search",
-  "plus.magnifyingglass": "saved-search",
-  "minus.magnifyingglass": "search-off",
+  "plus.magnifyingglass": "zoom-in",
+  "minus.magnifyingglass": "zoom-out",
   qrcode: "qr-code",
   // Camera tools
-  "flashlight.off.circle": "flashlight-off",
-  "flashlight.on.circle": "flashlight-on",
-  // "flashlight.off.circle": "flash-off",
-  // "flashlight.on.circle": "flash-on",
-  "flashlight.slash.circle": "flash-auto",
+  "bolt.fill": "flash-on",
+  "bolt.slash.fill": "flash-off",
+  "bolt.badge.a.fill": "flash-auto",
+  "flashlight.on.fill": "flashlight-on",
+  "flashlight.off.fill": "flashlight-off",
+  "camera.rotate.fill": "cameraswitch",
+  "arrow.down": "save",
+  "xmark.circle": "close",
+  "square.and.arrow.up": "upload",
+  "play": "play-arrow",
+  "pause": "pause",
 } as IconMapping;
 
 /**

@@ -2,7 +2,7 @@ import { Colors } from "@/constants/theme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { CameraMode } from "expo-camera";
 import { Image } from "expo-image";
-import { Asset, getAssetsAsync } from "expo-media-library";
+import { Asset, getAlbumsAsync, getAssetsAsync } from "expo-media-library";
 import { SymbolView } from "expo-symbols";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -15,6 +15,7 @@ import {
 
 interface MainRowActionsProps {
   handleTakePicture: () => void;
+  toogleRecord: () => void;
   cameraMode: CameraMode;
   isRecording: boolean;
   setIsRecording: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +23,7 @@ interface MainRowActionsProps {
 
 export default function MainRowActions({
   handleTakePicture,
+  toogleRecord,
   cameraMode,
   isRecording,
   setIsRecording,
@@ -38,11 +40,13 @@ export default function MainRowActions({
 
     try {
       isLoadingMoreRef.current = true;
-      // const fetchedAlbums = await getAlbumsAsync();
-      // console.log("Albums:", JSON.stringify(fetchedAlbums, null, 2));
+      const fetchedAlbums = await getAlbumsAsync({
+        includeSmartAlbums: false,
+      });
+      console.log("Albums:", JSON.stringify(fetchedAlbums, null, 2));
 
       const albumAssets = await getAssetsAsync({
-        // album: fetchedAlbums[0],
+        // album: fetchedAlbums[8],
         mediaType: ["photo"],
         sortBy: "creationTime",
         first: PAGE_SIZE,
@@ -102,7 +106,7 @@ export default function MainRowActions({
             if (cameraMode === "picture") {
               handleTakePicture();
             } else {
-              setIsRecording(!isRecording);
+              toogleRecord()
             }
           }}
         >

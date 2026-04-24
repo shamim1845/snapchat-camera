@@ -1,7 +1,9 @@
 import BottomRowTools from "@/components/BottomRowTools";
 import CameraTools from "@/components/CameraTools";
 import MainRowActions from "@/components/MainRowActions";
+import PictureView from "@/components/PictureView";
 import QRCodeButton from "@/components/QRCodeButton";
+import VideoViewComponent from "@/components/VideoView";
 import {
   BarcodeScanningResult,
   CameraMode,
@@ -32,6 +34,9 @@ export default function HomeScreen() {
   const [cameraFlash, setCameraFlash] = useState<FlashMode>("auto");
   const [cameraFacing, setCameraFacing] = useState<CameraType>("back");
 
+  const [picture, setPicture] = useState<string | null>(null);
+  const [video, setVideo] = useState<string | null>("");
+
   // Track AppState
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
@@ -53,11 +58,27 @@ export default function HomeScreen() {
   }, [isBrowsing]);
 
   // Handlers
+  const toogleRecord = async () => {
+    if (isRecording) {
+      cameraRef.current?.stopRecording()
+      setIsRecording(false)
+    } else {
+      setIsRecording(true)
+      const response = await cameraRef.current?.recordAsync()
+      console.log("video ", response)
+      setVideo(response!.uri || null)
+    }
+  }
+
+
   const handleTakePicture = async () => {
     if (cameraRef.current) {
       try {
         const result = await cameraRef.current.takePictureAsync();
         console.log("Picture taken:", result);
+        if (result.uri) {
+          setPicture(result.uri);
+        }
       } catch (error) {
         console.error("Error taking picture:", error);
       }
@@ -107,6 +128,15 @@ export default function HomeScreen() {
   // We don't want to show anything while browsing
   if (isBrowsing) return <></>;
 
+  // Picture view
+  if (picture) {
+    return <PictureView picture={picture} setPicture={setPicture} />;
+  }
+
+  if (video) {
+    return <VideoViewComponent video={video} setVideo={setVideo} />
+  }
+
   return (
     <View
       style={{
@@ -148,7 +178,7 @@ export default function HomeScreen() {
             <QRCodeButton handleOpenQrCode={handleOpenQrCode} />
           </View>
 
-          {/* Camera Tools */}
+          {/* Scrren Right Side Camera Tools */}
           <CameraTools
             cameraZoom={cameraZoom}
             setCameraZoom={setCameraZoom}
@@ -164,9 +194,12 @@ export default function HomeScreen() {
           <MainRowActions
             cameraMode={cameraMode}
             handleTakePicture={handleTakePicture}
+            toogleRecord={toogleRecord}
             isRecording={isRecording}
             setIsRecording={setIsRecording}
           />
+
+          {/* Scrren Bottom Tools */}
           <BottomRowTools
             cameraMode={cameraMode}
             setCameraMode={setCameraMode}

@@ -1,7 +1,6 @@
 import { CameraType, FlashMode } from "expo-camera";
 import React, { Dispatch, SetStateAction } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { ThemedText } from "./themed-text";
 import { IconSymbol } from "./ui/icon-symbol";
 
 interface CameraToolsProps {
@@ -31,11 +30,11 @@ const CameraTools = ({
         style={styles.directionRow}
         onPress={() => setCameraTorch((prev) => !prev)}
       >
-        <ThemedText>Torch {cameraTorch === true ? "On" : "Of"} </ThemedText>
+        {/* <ThemedText>Torch {cameraTorch === true ? "On" : "Off"} </ThemedText> */}
         <IconSymbol
-          name={cameraTorch ? "flashlight.off.circle" : "flashlight.on.circle"}
+          name={cameraTorch ? "flashlight.on.fill" : "flashlight.off.fill"}
           color="white"
-          size={40}
+          size={30}
         />
       </TouchableOpacity>
 
@@ -48,20 +47,20 @@ const CameraTools = ({
           )
         }
       >
-        <ThemedText>
+        {/* <ThemedText>
           Flash{" "}
-          {cameraFlash === "auto" ? "Auto" : cameraFlash === "on" ? "On" : "Of"}
-        </ThemedText>
+          {cameraFlash === "auto" ? "Auto" : cameraFlash === "on" ? "On" : "Off"}
+        </ThemedText> */}
         <IconSymbol
           name={
             cameraFlash === "auto"
-              ? "flashlight.slash.circle"
+              ? "bolt.badge.a.fill"
               : cameraFlash === "on"
-                ? "flashlight.on.circle"
-                : "flashlight.off.circle"
+                ? "bolt.fill"
+                : "bolt.slash.fill"
           }
           color="white"
-          size={40}
+          size={30}
         />
       </TouchableOpacity>
 
@@ -70,15 +69,15 @@ const CameraTools = ({
         style={styles.directionRow}
         onPress={() => setCameraZoom((prev) => (prev < 1 ? prev + 0.1 : prev))}
       >
-        <ThemedText>Zoom In</ThemedText>
-        <IconSymbol name="plus.magnifyingglass" color="white" size={40} />
+        {/* <ThemedText>Zoom In</ThemedText> */}
+        <IconSymbol name="plus.magnifyingglass" color="white" size={30} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.directionRow}
         onPress={() => setCameraZoom((prev) => (prev > 0 ? prev - 0.1 : prev))}
       >
-        <ThemedText>Zoom Out</ThemedText>
-        <IconSymbol name="minus.magnifyingglass" color="white" size={40} />
+        {/* <ThemedText>Zoom Out</ThemedText> */}
+        <IconSymbol name="minus.magnifyingglass" color="white" size={30} />
       </TouchableOpacity>
 
       {/* Facing */}
@@ -88,8 +87,8 @@ const CameraTools = ({
           setCameraFacing((prev) => (prev === "back" ? "front" : "back"))
         }
       >
-        <ThemedText>{cameraFacing === "back" ? "Back" : "Front"} </ThemedText>
-        <IconSymbol name="minus.magnifyingglass" color="white" size={40} />
+        {/* <ThemedText>{cameraFacing === "back" ? "Back" : "Front"} </ThemedText> */}
+        <IconSymbol name="camera.rotate.fill" color="white" size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: "30%",
     right: 10,
-    gap: 10,
+    gap: 20,
     zIndex: 1,
   },
   directionRow: {
